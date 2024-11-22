@@ -66,6 +66,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+
+
+    const calendarTitle = document.getElementById("calendarTitle");
+    const calendarBody = document.getElementById("calendarBody");
+    const prevMonth = document.getElementById("prevMonth");
+    const nextMonth = document.getElementById("nextMonth");
+    
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let today = new Date();
+    
+    function renderCalendar(month, year) {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"
+        ];
+    
+        calendarTitle.innerText = `${monthNames[month]} ${year}`;
+        calendarBody.innerHTML = "";
+    
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+        let row = document.createElement("tr");
+        for (let i = 0; i < firstDay; i++) {
+            row.appendChild(document.createElement("td"));
+        }
+    
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement("td");
+            cell.innerText = day;
+    
+            // Highlight today's date
+            if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                cell.classList.add("active");
+            }
+    
+            cell.addEventListener("click", () => {
+                document.querySelectorAll(".calendar td").forEach((td) => td.classList.remove("active"));
+                cell.classList.add("active");
+            });
+    
+            row.appendChild(cell);
+    
+            if ((firstDay + day) % 7 === 0 || day === daysInMonth) {
+                calendarBody.appendChild(row);
+                row = document.createElement("tr");
+            }
+        }
+    }
+    
+    prevMonth.addEventListener("click", () => {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        renderCalendar(currentMonth, currentYear);
+    });
+    
+    nextMonth.addEventListener("click", () => {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderCalendar(currentMonth, currentYear);
+    });
+    
+    // Initial render
+    renderCalendar(currentMonth, currentYear);
+    
+    
+
+
+    
+
     const storageCtx = document.getElementById('storageChart').getContext('2d');
     const storageChart = new Chart(storageCtx, {
         type: 'doughnut',

@@ -15,7 +15,7 @@
             <div class="logo">
                 <img src="logo.png" alt="OptiFoodDashboard">
                 <span> OptiFoodDashboard <br>
-                    <p class="subtitle">SMART KITCHEN HOUSEHOLD MONITORING APPLICATION</p>
+                    <p class="subtitle">SMART KITCHEN MONITORING APPLICATION</p>
                 </span>
             </div>
             <nav>
@@ -92,6 +92,29 @@
                 <canvas id="summaryChart"></canvas>
             </div>
 
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <button id="prevMonth">&lt;</button>
+                    <span id="calendarTitle"></span>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <table class="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendarBody">
+                    </tbody>
+                </table>
+            </div>
+
         <div class="container">
             <div class="most-consumed-items">
                 <h2>Most Consumed Items</h2>
@@ -136,6 +159,7 @@
                             <td>20%</td>
                         </tr>
                     </tbody>
+                    <a href="reports.html" class="see-more">See more...</a>
                 </table>
             </div>
         </div>
