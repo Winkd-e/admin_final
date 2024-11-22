@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiFood - Sign In</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="module" src="app.js" defer></script>
+
+    <script type="module">
+      // Firebase SDK Imports
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+      // Firebase Configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCwkevD5GuyL-UH_J68stlb8-yETjjdNXg",
+        authDomain: "fir-e42bb.firebaseapp.com",
+        databaseURL: "https://fir-e42bb-default-rtdb.firebaseio.com",
+        projectId: "fir-e42bb",
+        storageBucket: "fir-e42bb.appspot.com",
+        messagingSenderId: "1019133485649",
+        appId: "1:1019133485649:web:476f8eff007283efcc0e70"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const database = getDatabase(app);
+
+      // Handle form submission
+      window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              console.log("User signed in:", user);
+              checkUserRole(user);
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.error("Error: ", errorCode, errorMessage);
+              alert("Error: " + errorMessage);
+            });
+        });
+      });
+
+      // Function to check user role from Realtime Database
+      async function checkUserRole(user) {
+        const userRef = ref(database, 'admin_users/' + user.uid);
+        const userSnapshot = await get(userRef);
+
+        if (userSnapshot.exists()) {
+          const userData = userSnapshot.val();
+          const role = userData.role; // Extract role data from user data
+
+          if (role === 'admin') {
+            // If the user is an admin, redirect to the admin dashboard
+            window.location.href = "dashboard.html";
+          } else {
+            // If not an admin, show an alert and prevent access
+            console.log("User is not an admin.");
+            alert("You are not authorized to access this page.");
+            window.location.href = "index.html";  // Redirect to the login page
+          }
+        } else {
+          console.log("User not found in the system.");
+          alert("User not found in the system.");
+        }
+      }
+    </script>
+
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-side">
+          <div class="illustration">
+              <div class="slides">
+                <img src="slide1.jpg" alt="Manage your home stock and track your food with ease!" class="main-image">
+                  <h2>Manage your home stock and track your food with ease!!</h2>
+                  <p>With OptiFood, simplify your kitchen tasks, reduce waste, and make smarter meal choices for a healthier, happier home!</p>
+              </div>
+
+              <div class="slides">
+                <img src="slide2.png" alt="Manage your home stock and track your food with ease!" class="main-image">
+                <h2>Plan Your Meals and Save Time!</h2>
+                <p>Effortlessly create meal plans, reduce cooking time, and enjoy delicious home-cooked meals without the hassle. Make the most of your ingredients and reclaim your time in the kitchen!</p>
+              </div>
+
+              <div class="slides">
+                <img src="slide3.png" alt="Manage your home stock and track your food with ease!" class="main-image">
+                <h2>Keep Your Grocery List Organized and Up-to-Date!</h2>
+                <p>Stay organized and ensure you never run out of essentials. Save money by avoiding unnecessary purchases and make your shopping experience simple and efficient!</p>
+              </div>
+          </div>
+          
+          <div class="dots">
+                <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+          </div>
+      </div>
+
+      <!-- Right Side -->
+      <div class="right-side">
+          <div class="logo">
+              <div class="logo-icon">
+                  <div>
+                      <img viewBox="0 0 24 24" class="sidebarlogo" src="logo.png" alt="OptiFood Logo" />
+                  </div>
+              </div>
+              <div class="logo-text">
+                  <h1>OptiFood</h1>
+                  <p>SMART KITCHEN MONITORING APPLICATION</p>
+              </div>
+          </div>
+
+          <div class="login-form">
+              <h2>Sign In</h2>
+              <form id="loginForm">
+                  <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" placeholder="helloworld@optifood.com">
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" id="password" placeholder="********">
+                  </div>
+                  <button type="submit">Login</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  </body>
+</html>

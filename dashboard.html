@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OptiFoodDashboard</title>
+        <link rel="stylesheet" href="dashboard.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>    
+
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="OptiFoodDashboard">
+                <span> OptiFoodDashboard <br>
+                    <p class="subtitle">SMART KITCHEN HOUSEHOLD MONITORING APPLICATION</p>
+                </span>
+            </div>
+            <nav>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home icon"></i>Dashboard
+                </a>
+                <a href="household.html" class="nav-link">
+                    <i class="fas fa-users icon"></i>Households
+                </a>
+                <a href="items.html" class="nav-link">
+                    <i class="fas fa-box icon"></i>Items
+                </a>
+                <a href="reports.html" class="nav-link">
+                    <i class="fas fa-chart-line icon"></i>Reports
+                </a>
+                <a href="notifications.html" class="nav-link">
+                    <i class="fas fa-bell icon"></i>Notifications
+                </a>
+                <a href="recent-activity.html" class="nav-link">
+                    <i class="fas fa-clock icon"></i>Recent Activity
+                </a>
+            </nav>
+            <hr>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog icon"></i>Settings
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-sign-out-alt icon"></i>Logout
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <header class="header">
+                <div class="search-bar">
+                    <input type="search" placeholder="Search for something">
+                </div>
+                <h1>Dashboard - Brgy. Bonuan Gueset</h1>
+            </header>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Household</h3>
+                    <p>0</p>
+                    <img src="household.jpg" alt="">
+                </div>
+                <div class="stat-card">
+                    <h3>Total Item</h3>
+                    <p>0</p>
+                    <img src="item.jpg" alt="">
+                </div>
+                <div class="stat-card">
+                    <h3>Total Consumption</h3>
+                    <p>0</p>
+                    <img src="consumption.jpg" alt="">
+                </div>
+                <div class="stat-card">
+                    <h3>Total Food Wasted</h3>
+                    <p>0</p>
+                    <img src="waste.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="summary">
+                <h2>Summary</h2>
+                <div class="summary-controls">
+                    <select>
+                        <option>This Week</option>
+                        <option>This Month</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
+                <canvas id="summaryChart"></canvas>
+            </div>
+
+        <div class="container">
+            <div class="most-consumed-items">
+                <h2>Most Consumed Items</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Unit</th>
+                            <th>Storage</th>
+                            <th>Item Consumed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FD001</td>
+                            <td>Tomato</td>
+                            <td>Fruit</td>
+                            <td>60</td>
+                            <td>Kg</td>
+                            <td>Fridge</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td>MD002</td>
+                            <td>Chicken Wings</td>
+                            <td>Meats</td>
+                            <td>70</td>
+                            <td>Kg</td>
+                            <td>Freezer</td>
+                            <td>90%</td>
+                        </tr>
+                        <tr>
+                            <td>FD003</td>
+                            <td>Tilapia</td>
+                            <td>Seafood</td>
+                            <td>100</td>
+                            <td>Kg</td>
+                            <td>Freezer</td>
+                            <td>20%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="household-users">
+                <table>
+                    <thead>
+                        <h2>Household Users</h2>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Household</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>No. of family members</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Bonao Household</td>
+                            <td>Dan Joseph Bonao</td>
+                            <td>@DannyBoy</td>
+                            <td>DannyB123@gmail.com</td>
+                            <td>+63(123)-456-7878</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Bonao Household</td>
+                            <td>Dan Joseph Bonao</td>
+                            <td>@DannyBoy</td>
+                            <td>DannyB123@gmail.com</td>
+                            <td>+63(123)-456-7878</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Bonao Household</td>
+                            <td>Dan Joseph Bonao</td>
+                            <td>@DannyBoy</td>
+                            <td>DannyB123@gmail.com</td>
+                            <td>+63(123)-456-7878</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                    <a href="households.html" class="see-more">See more...</a>
+                </table>
+            </div>
+        </div>
+
+            <div class="container">
+            <div class="inventory-items">
+                <table>
+                    <h2>Inventory Items</h2>
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Unit</th>
+                            <th>Storage</th>
+                            <th>Consumed</th>
+                            <th>Wasted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FD001</td>
+                            <td>Tomato</td>
+                            <td>Fruit</td>
+                            <td>60</td>
+                            <td>Kg</td>
+                            <td>Fridge</td>
+                            <td>50%</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>MD002</td>
+                            <td>Chicken Wings</td>
+                            <td>Meats</td>
+                            <td>70</td>
+                            <td>Kg</td>
+                            <td>Freezer</td>
+                            <td>90%</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>FD003</td>
+                            <td>Tilapia</td>
+                            <td>Seafood</td>
+                            <td>100</td>
+                            <td>Kg</td>
+                            <td>Freezer</td>
+                            <td>20%</td>
+                            <td>80%</td>
+                        </tr>
+                    </tbody>
+                    <a href="items.html" class="see-more">See more...</a>
+                </table>
+            </div>
+        </div>
+
+            <div class="container">
+                <div class="activity-list">
+                    <div class="activity-tabs">
+                        <button class="active">All</button>
+                        <button>Unread</button>
+                        <button>Read</button>
+                    </div>
+                    <div class="activity-items">
+                        <div class="activity-item">
+                            <div class="activity-icon remove">X</div>
+                            <div class="activity-content">
+                                <h3>Bonao Household Removed</h3>
+                                <p>Admin 1 has deleted the Bonao household from the system. All associated inventory records have been removed.</p>
+                                <span class="activity-date">11/20/2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+</body>
+
+<script src="dashboard.js"></script>
+</html>
